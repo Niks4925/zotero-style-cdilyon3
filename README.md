@@ -1,2 +1,2 @@
-# zotero-style-cdilyon3
-Style zotero adapté au CDI Lyon 3
+# Généralités
+Style zotero adapté aux styles de citations CDI Lyon 3
