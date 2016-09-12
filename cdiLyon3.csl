@@ -1,437 +1,459 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="fr-FR">
-<!-- This style was edited with the Visual CSL Editor (http://editor.citationstyles.org/visualEditor/) -->
-  <info>
-    <title>CDI Lyon 3</title>
-    <id>http://www.zotero.org/styles/cdi-lyon-3</id>
-    <link href="http://www.zotero.org/styles/cdi-lyon-3" rel="self"/>
-    <link href="http://zotero.hypotheses.org/77" rel="documentation"/>
-    <author>
-      <name>Lili</name>
-      <email/>
-    </author>
-    <contributor>
-      <name>Niks4925</name>
-      <email/>
-    </contributor>
-    <category citation-format="numeric"/>
-    <summary>Style Zotero respectant les normes bibliographiques fran?aises : NF Z44-005  et NF ISO 690-2</summary>
-    <updated>2014-10-12T14:50:33+00:00</updated>
-    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
-  </info>
-  <locale xml:lang="fr">
-    <terms>
-      <term name="page" form="short">
-        <single>p. </single>
-        <multiple>pp. </multiple>
-      </term>
-	  <term name="paragraph" form="short">
-		<single>§ </single>
-		<multiple>§§ </multiple>
-	  </term>
-    </terms>
-  </locale>
-  
-  <macro name="type-sorting">
-	<choose>
-		<if type="book">
-			<text value="LIVRES"/>
-		</if>
-		<else>
-			<text value="AAUTRES"/>
-		</else>
-	</choose>
-  </macro>
-  
-    <macro name="citation-locator">
-    <group suffix=" ">
-      <choose>
-		<if variable="locator">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text"
+	version="1.0" demote-non-dropping-particle="sort-only" default-locale="fr-FR">
+	<info>
+		<title>CDI Lyon 3</title>
+		<id>http://www.zotero.org/styles/cdi-lyon-3</id>
+		<link href="http://www.zotero.org/styles/cdi-lyon-3" rel="self" />
+		<link href="http://zotero.hypotheses.org/77" rel="documentation" />
+		<author>
+			<name>Lili</name>
+			<email />
+		</author>
+		<contributor>
+			<name>Niks4925</name>
+			<email />
+		</contributor>
+		<category citation-format="numeric" />
+		<summary>Style Zotero respectant les normes bibliographiques
+			fran?aises : NF Z44-005 et NF ISO 690-2</summary>
+		<updated>2014-10-12T14:50:33+00:00</updated>
+		<rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons
+			Attribution-ShareAlike 3.0 License</rights>
+	</info>
+	<locale xml:lang="fr">
+		<terms>
+			<term name="page" form="short">
+				<single>p. </single>
+				<multiple>pp. </multiple>
+			</term>
+			<term name="paragraph" form="short">
+				<single>§ </single>
+				<multiple>§§ </multiple>
+			</term>
+		</terms>
+	</locale>
+
+	<macro name="type-sorting">
+		<choose>
+			<if type="book">
+				<text value="LIVRES" />
+			</if>
+			<else>
+				<text value="AAUTRES" />
+			</else>
+		</choose>
+	</macro>
+
+	<macro name="citation-locator">
+		<group suffix=" ">
 			<choose>
-				<if locator="chapter">
-					<label variable="locator" form="long" text-case="capitalize-first"/>
+				<if variable="locator">
+					<choose>
+						<if locator="chapter">
+							<label variable="locator" form="long" text-case="capitalize-first" />
+						</if>
+						<else>
+							<label variable="locator" form="short" prefix=", " />
+						</else>
+					</choose>
+					<text variable="locator" suffix="." />
 				</if>
-				<else>
-					<label variable="locator" form="short" prefix=", "/>
-				</else>
 			</choose>
-			<text variable="locator" suffix="."/>
-		</if>
-      </choose>
-    </group>
-  </macro>
-  
-  <macro name="author">
-	<choose>
-		<if variable="author">
-			<names variable="author">
-			  <name sort-separator=" " initialize-with="." name-as-sort-order="all" delimiter=", " and="text" delimiter-precedes-last="never">
-				<name-part name="given" text-case="uppercase"/>
-				<name-part name="family" text-case="uppercase"/>
-				
-			  </name>
-			</names>
-		</if>
-		<else>
-			<names variable="editor">
-				  <name sort-separator=" " initialize-with="." name-as-sort-order="all" delimiter=", " delimiter-precedes-last="always">
-					<name-part name="family" text-case="uppercase"/>
-					<name-part name="given" text-case="uppercase"/>
-				  </name>
-			</names>
-		</else>
-	</choose>
-  </macro>
-  
-  <macro name="author-short">
-	  <choose>
+		</group>
+	</macro>
+
+	<macro name="author">
+		<choose>
 			<if variable="author">
 				<names variable="author">
-				  <name sort-separator=" " initialize-with="." name-as-sort-order="all" delimiter=", " and="text" delimiter-precedes-last="never">
-					<name-part name="family" text-case="uppercase"/>
-					<name-part name="given" text-case="uppercase" prefix="(" suffix=")"/>
-				  </name>
+					<name sort-separator=" " initialize-with="."
+						name-as-sort-order="all" delimiter=", " and="text"
+						delimiter-precedes-last="never">
+						<name-part name="given" text-case="uppercase" />
+						<name-part name="family" text-case="uppercase" />
+
+					</name>
 				</names>
 			</if>
 			<else>
 				<names variable="editor">
-					  <name sort-separator=" " initialize-with="." name-as-sort-order="all" delimiter=", " delimiter-precedes-last="always">
-						<name-part name="family" text-case="uppercase"/>
-						<name-part name="given" text-case="uppercase"  prefix="(" suffix=")"/>
-					  </name>
-					<label form="short" prefix=" (" suffix=".)" text-case="lowercase" strip-periods="true"/>
+					<name sort-separator=" " initialize-with="."
+						name-as-sort-order="all" delimiter=", " delimiter-precedes-last="always">
+						<name-part name="family" text-case="uppercase" />
+						<name-part name="given" text-case="uppercase" />
+					</name>
 				</names>
 			</else>
-	</choose>
-  </macro>
-  
-  <macro name="author-citation">
-	<choose>
-		<if variable="author">
-			<names variable="author">
-				<name sort-separator=" " initialize-with="." delimiter=", " and="text" delimiter-precedes-last="never">
-					<name-part name="given" text-case="uppercase"/>
-					<name-part name="family" text-case="uppercase"/>
-				</name>
-			</names>
-		</if>
-		<else>
-			<names variable="editor">
-				  <name sort-separator=" " initialize-with="." delimiter=", " delimiter-precedes-last="always">
-					<name-part name="family" text-case="uppercase"/>
-					<name-part name="given" text-case="uppercase"/>
-				  </name>
-				<label form="short" prefix=" (" suffix=".)" text-case="lowercase" strip-periods="true"/>
-			</names>
-		</else>
-	</choose>
-  </macro>
-  
-  <macro name="editor">
-    <names variable="editor">
-      <name sort-separator=" " initialize-with="." name-as-sort-order="all" delimiter=", " delimiter-precedes-last="always">
-        <name-part name="family" text-case="uppercase"/>
-        <name-part name="given" text-case="uppercase" prefix="(" suffix=")"/>
-      </name>
-      <label form="short" prefix=" (" suffix=".)" text-case="lowercase" strip-periods="true"/>
-    </names>
-  </macro>
-  
-  <macro name="publisher">
-    <group delimiter=", ">
-      <choose>
-        <if variable="publisher-place">
-          <text variable="publisher-place"/>
-        </if>
-      </choose>
-      <choose>
-        <if variable="publisher">
-          <text variable="publisher"/>
-        </if>
-        <else>
-          <text value="[s.n.], "/>
-        </else>
-      </choose>
-      <text macro="edition"/>
-      <choose>
-        <if variable="issued">
-          <date variable="issued">
-            <date-part name="year"/>
-          </date>
-        </if>
-        <else>
-          <text value="[s.d.]."/>
-        </else>
-      </choose>
-    </group>
-  </macro>
-  
-  <macro name="access">
-    <choose>
-      <if variable="DOI">
-        <text value="Disponible sur : "/>
-        <group prefix="&lt; " suffix=" &gt;">
-          <text value="http://dx.doi.org/"/>
-          <text variable="DOI"/>
-        </group>
-      </if>
-      <else-if variable="URL">
-        <text value="Disponible sur : "/>
-        <group prefix="" suffix="">
-          <text variable="URL"/>
-        </group>
-      </else-if>
-    </choose>
-  </macro>
-  
-  <macro name="accessed-date">
-    <choose>
-      <if variable="URL">
-        <group prefix="(" suffix=")" delimiter=" ">
-          <text value="consult? le"/>
-          <date variable="accessed">
-            <date-part name="day" suffix=" "/>
-            <date-part name="month" suffix=" "/>
-            <date-part name="year"/>
-          </date>
-        </group>
-      </if>
-      <else-if variable="DOI">
-        <group prefix="(" suffix=")" delimiter=" ">
-          <text value="consult? le"/>
-          <date variable="accessed">
-            <date-part name="day" suffix=" "/>
-            <date-part name="month" suffix=" "/>
-            <date-part name="year"/>
-          </date>
-        </group>
-      </else-if>
-    </choose>
-  </macro>
- 
-  <macro name="edition">
-    <choose>
-      <if is-numeric="edition">
-        <group delimiter=" ">
-          <number variable="edition" form="ordinal"/>
-          <text term="edition" form="short"/>
-        </group>
-      </if>
-      <else>
-        <text variable="edition" suffix="."/>
-      </else>
-    </choose>
-  </macro>
-  
-  <macro name="collection">
-    <choose>
-      <if variable="collection-number">
-        <text variable="collection-title" prefix="("/>
-        <text variable="collection-number" prefix=", " suffix=")"/>
-      </if>
-      <else>
-        <text variable="collection-title" suffix=", "/>
-      </else>
-    </choose>
-  </macro>
-  
-  <macro name="locators">
-    <group delimiter=", ">
-      <text variable="volume" prefix="Vol. "/>
-      <text variable="issue" prefix="n° "/>
-      <date variable="issued">
-        <date-part name="year"/>
-      </date>
-      <text variable="page" prefix="pp. " suffix="."/>
-    </group>
-  </macro>
-  
-  
-  <citation near-note-distance="0">
-    <layout>
-      <group>
-        <choose>
-          <if type="chapter paper-conference" match="any">
-			<text macro="author-citation" suffix=", "/>
-			<text variable="title" quotes="true" suffix=", "/>
-			<choose>
-				<if position="ibid-with-locator"> <!-- page differente citée -->
-					<text value="op.cit." font-style="italic" suffix=", "/>
-				</if>
-				<else>
-					<text value="in " font-style="italic" />
-					<text variable="container-title" font-style="italic" suffix=", "/>
-					<text macro="publisher"/>
-				</else>
-			</choose>
-			<text macro="citation-locator"/>
-		  </if>
-		  
-		  <else-if type="article-journal">
-			<text macro="author-citation" suffix=", "/>
-		    <text variable="title" quotes="true" suffix=", "/>
-			<choose>
-				<if position="ibid-with-locator"> <!-- page differente citée -->
-					<text value="op.cit." font-style="italic" suffix=", "/>
-				</if>
-				<else>
-					<choose>
-						<if variable="container-title-short">
-							<text variable="container-title-short" font-style="italic" suffix=", "/>
-						</if>
-						<else>
-							<text variable="container-title" font-style="italic" suffix=", "/>
-						</else>
-					</choose>
-					<date variable="issued">
-					   <date-part name="year"/>
-					</date>	
-					<choose>
-						<if variable="volume">
-							<text variable="volume" prefix=", Vol. "/>
-						</if>
-					</choose>					
-					<choose>
-						<if variable="issue">
-							<text variable="issue" prefix=", "/>
-						</if>
-					</choose>					
-				</else>
-			</choose>
-			<text macro="citation-locator"/>
-          </else-if>
-		  
-		  <else-if type="webpage thesis book" match="any">
-			<text macro="author-citation" suffix=", "/>
-			<text variable="title" font-style="italic" suffix=", "/>
-			<choose>
-				<if position="ibid-with-locator"> <!-- page differente citée -->
-					<text value="op.cit." font-style="italic" suffix=", "/>
-				</if>
-				<else>
-					<text macro="publisher"/>
-				</else>
-			</choose>
-			<text macro="citation-locator"/>
-		  </else-if>
-		  
-		  <else-if type="report">
-			<text macro="author-citation" suffix=", "/>
-			<text variable="title" font-style="italic" suffix=", "/>
-			<choose>
-				<if position="ibid-with-locator"> <!-- page differente citée -->
-					<text value="op.cit." font-style="italic" suffix=", "/>
-				</if>
-				<else>
-					<text macro="publisher"/>
-					<choose>
-						<if variable="number">
-							<text variable="number" prefix=", n° "/>
-						</if>
-					</choose>
-				</else>
-			</choose>
-			<text macro="citation-locator"/>
-		  </else-if>
-		  
-		  <else-if type="legal_case">
-			<text macro="author-citation" suffix=", "/>
-			<text variable="title" font-style="italic" suffix=", "/>
-			<choose>
-				<if position="ibid-with-locator"> <!-- page differente citée -->
-					<text value="op.cit." font-style="italic" suffix=", "/>
-				</if>
-				<else>
-					<text variable="number" prefix="n° " suffix=", "/>
-					<text variable="container-title" prefix="" suffix=", "/>
-					<date variable="issued">
-					   <date-part name="day" suffix=" "/>
-					   <date-part name="month" form="short" suffix=" "/>
-					   <date-part name="year"/>
-					</date>
-				</else>
-			</choose>
-			<text macro="citation-locator"/>
-		  </else-if>
-		    
-		  <else-if type="legislation">
-			<text variable="title" font-style="italic" suffix=", "/>
-			<text macro="author" suffix=", "/>
-			<choose>
-				<if position="ibid-with-locator"> <!-- page differente citée -->
-					<text value="op.cit." font-style="italic" suffix=", "/>
-				</if>
-				<else>
-					<text variable="number" suffix=", "/>
-					<date variable="issued">
-					   <date-part name="day" suffix=" "/>
-					   <date-part name="month" form="short" suffix=" "/>
-					   <date-part name="year"/>
-					</date>
-				</else>
-			</choose>
-		  </else-if>
+		</choose>
+	</macro>
 
-        </choose>
-      </group>
-    </layout>
-  </citation>
-  
-  <bibliography entry-spacing="1" line-spacing="1">
-    <sort>
-	  <key macro="type-sorting"/>
-	  <key macro="author"/>
-    </sort>
-    <layout>
-      <group>
-        <text macro="author-short" suffix=", "/>
-        <choose>
-			<if type="chapter paper-conference" match="any">
-				<text variable="title" quotes="true" suffix=", "/>
-				<text value="in " font-style="italic" />
-				<text macro="editor" suffix=", "/>
-				<text variable="container-title" font-style="italic" suffix=", "/>
-				<text macro="publisher" suffix=", "/>
-				<text variable="page" prefix="pp. " suffix="."/>
+	<macro name="author-short">
+		<choose>
+			<if variable="author">
+				<names variable="author">
+					<name sort-separator=" " initialize-with="."
+						name-as-sort-order="all" delimiter=", " and="text"
+						delimiter-precedes-last="never">
+						<name-part name="family" text-case="uppercase" />
+						<name-part name="given" text-case="uppercase" prefix="("
+							suffix=")" />
+					</name>
+				</names>
 			</if>
-			
-			<else-if type="webpage book legislation report">
-				<text variable="title" font-style="italic" suffix=", "/>
-				<text macro="publisher" suffix=", "/>
-				<text variable="number-of-pages" suffix=" pages."/>
+			<else>
+				<names variable="editor">
+					<name sort-separator=" " initialize-with="."
+						name-as-sort-order="all" delimiter=", " delimiter-precedes-last="always">
+						<name-part name="family" text-case="uppercase" />
+						<name-part name="given" text-case="uppercase" prefix="("
+							suffix=")" />
+					</name>
+					<label form="short" prefix=" (" suffix=".)" text-case="lowercase"
+						strip-periods="true" />
+				</names>
+			</else>
+		</choose>
+	</macro>
+
+	<macro name="author-citation">
+		<choose>
+			<if variable="author">
+				<names variable="author">
+					<name sort-separator=" " initialize-with="." delimiter=", "
+						and="text" delimiter-precedes-last="never">
+						<name-part name="given" text-case="uppercase" />
+						<name-part name="family" text-case="uppercase" />
+					</name>
+				</names>
+			</if>
+			<else>
+				<names variable="editor">
+					<name sort-separator=" " initialize-with="." delimiter=", "
+						delimiter-precedes-last="always">
+						<name-part name="family" text-case="uppercase" />
+						<name-part name="given" text-case="uppercase" />
+					</name>
+					<label form="short" prefix=" (" suffix=".)" text-case="lowercase"
+						strip-periods="true" />
+				</names>
+			</else>
+		</choose>
+	</macro>
+
+	<macro name="editor">
+		<names variable="editor">
+			<name sort-separator=" " initialize-with="." name-as-sort-order="all"
+				delimiter=", " delimiter-precedes-last="always">
+				<name-part name="family" text-case="uppercase" />
+				<name-part name="given" text-case="uppercase" prefix="("
+					suffix=")" />
+			</name>
+			<label form="short" prefix=" (" suffix=".)" text-case="lowercase"
+				strip-periods="true" />
+		</names>
+	</macro>
+
+	<macro name="publisher">
+		<group delimiter=", ">
+			<choose>
+				<if variable="publisher-place">
+					<text variable="publisher-place" />
+				</if>
+			</choose>
+			<choose>
+				<if variable="publisher">
+					<text variable="publisher" />
+				</if>
+				<else>
+					<text value="[s.n.], " />
+				</else>
+			</choose>
+			<text macro="edition" />
+			<choose>
+				<if variable="issued">
+					<date variable="issued">
+						<date-part name="year" />
+					</date>
+				</if>
+				<else>
+					<text value="[s.d.]." />
+				</else>
+			</choose>
+		</group>
+	</macro>
+
+	<macro name="access">
+		<choose>
+			<if variable="DOI">
+				<text value="Disponible sur : " />
+				<group prefix="&lt; " suffix=" &gt;">
+					<text value="http://dx.doi.org/" />
+					<text variable="DOI" />
+				</group>
+			</if>
+			<else-if variable="URL">
+				<text value="Disponible sur : " />
+				<group prefix="" suffix="">
+					<text variable="URL" />
+				</group>
 			</else-if>
-			
-			<else-if type="thesis">
-				<text variable="title" font-style="italic" suffix=", "/>
-				<text macro="publisher" suffix=", "/>
-				<text variable="number-of-pages" suffix=" pages."/>
+		</choose>
+	</macro>
+
+	<macro name="accessed-date">
+		<choose>
+			<if variable="URL">
+				<group prefix="(" suffix=")" delimiter=" ">
+					<text value="consult? le" />
+					<date variable="accessed">
+						<date-part name="day" suffix=" " />
+						<date-part name="month" suffix=" " />
+						<date-part name="year" />
+					</date>
+				</group>
+			</if>
+			<else-if variable="DOI">
+				<group prefix="(" suffix=")" delimiter=" ">
+					<text value="consult? le" />
+					<date variable="accessed">
+						<date-part name="day" suffix=" " />
+						<date-part name="month" suffix=" " />
+						<date-part name="year" />
+					</date>
+				</group>
 			</else-if>
-			
-			<else-if type="article-journal">
-				<text variable="title" quotes="true" suffix=", "/>
+		</choose>
+	</macro>
+
+	<macro name="edition">
+		<choose>
+			<if is-numeric="edition">
+				<group delimiter=" ">
+					<number variable="edition" form="ordinal" />
+					<text term="edition" form="short" />
+				</group>
+			</if>
+			<else>
+				<text variable="edition" suffix="." />
+			</else>
+		</choose>
+	</macro>
+
+	<macro name="collection">
+		<choose>
+			<if variable="collection-number">
+				<text variable="collection-title" prefix="(" />
+				<text variable="collection-number" prefix=", " suffix=")" />
+			</if>
+			<else>
+				<text variable="collection-title" suffix=", " />
+			</else>
+		</choose>
+	</macro>
+
+	<macro name="locators">
+		<group delimiter=", ">
+			<text variable="volume" prefix="Vol. " />
+			<text variable="issue" prefix="n° " />
+			<date variable="issued">
+				<date-part name="year" />
+			</date>
+			<text variable="page" prefix="pp. " suffix="." />
+		</group>
+	</macro>
+
+
+	<citation near-note-distance="0">
+		<layout>
+			<group>
 				<choose>
-					<if variable="container-title-short">
-						<text variable="container-title-short" font-style="italic" suffix=", "/>
+					<if type="chapter paper-conference" match="any">
+						<text macro="author-citation" suffix=", " />
+						<text variable="title" quotes="true" suffix=", " />
+						<choose>
+							<if position="ibid-with-locator"> <!-- page differente citée -->
+								<text value="op.cit." font-style="italic" suffix=", " />
+							</if>
+							<else>
+								<text value="in " font-style="italic" />
+								<text variable="container-title" font-style="italic"
+									suffix=", " />
+								<text macro="publisher" />
+							</else>
+						</choose>
+						<text macro="citation-locator" />
 					</if>
-					<else>
-						<text variable="container-title" font-style="italic" suffix=", "/>
-					</else>
+
+					<else-if type="article-journal">
+						<text macro="author-citation" suffix=", " />
+						<text variable="title" quotes="true" suffix=", " />
+						<choose>
+							<if position="ibid-with-locator"> <!-- page differente citée -->
+								<text value="op.cit." font-style="italic" suffix=", " />
+							</if>
+							<else>
+								<choose>
+									<if variable="container-title-short">
+										<text variable="container-title-short" font-style="italic"
+											suffix=", " />
+									</if>
+									<else>
+										<text variable="container-title" font-style="italic"
+											suffix=", " />
+									</else>
+								</choose>
+								<date variable="issued">
+									<date-part name="year" />
+								</date>
+								<choose>
+									<if variable="volume">
+										<text variable="volume" prefix=", Vol. " />
+									</if>
+								</choose>
+								<choose>
+									<if variable="issue">
+										<text variable="issue" prefix=", " />
+									</if>
+								</choose>
+							</else>
+						</choose>
+						<text macro="citation-locator" />
+					</else-if>
+
+					<else-if type="webpage thesis book" match="any">
+						<text macro="author-citation" suffix=", " />
+						<text variable="title" font-style="italic" suffix=", " />
+						<choose>
+							<if position="ibid-with-locator"> <!-- page differente citée -->
+								<text value="op.cit." font-style="italic" suffix=", " />
+							</if>
+							<else>
+								<text macro="publisher" />
+							</else>
+						</choose>
+						<text macro="citation-locator" />
+					</else-if>
+
+					<else-if type="report">
+						<text macro="author-citation" suffix=", " />
+						<text variable="title" font-style="italic" suffix=", " />
+						<choose>
+							<if position="ibid-with-locator"> <!-- page differente citée -->
+								<text value="op.cit." font-style="italic" suffix=", " />
+							</if>
+							<else>
+								<text macro="publisher" />
+								<choose>
+									<if variable="number">
+										<text variable="number" prefix=", n° " />
+									</if>
+								</choose>
+							</else>
+						</choose>
+						<text macro="citation-locator" />
+					</else-if>
+
+					<else-if type="legal_case">
+						<text macro="author-citation" suffix=", " />
+						<text variable="title" font-style="italic" suffix=", " />
+						<choose>
+							<if position="ibid-with-locator"> <!-- page differente citée -->
+								<text value="op.cit." font-style="italic" suffix=", " />
+							</if>
+							<else>
+								<text variable="number" prefix="n° " suffix=", " />
+								<text variable="container-title" prefix="" suffix=", " />
+								<date variable="issued">
+									<date-part name="day" suffix=" " />
+									<date-part name="month" form="short" suffix=" " />
+									<date-part name="year" />
+								</date>
+							</else>
+						</choose>
+						<text macro="citation-locator" />
+					</else-if>
+
+					<else-if type="legislation">
+						<text variable="title" font-style="italic" suffix=", " />
+						<text macro="author" suffix=", " />
+						<choose>
+							<if position="ibid-with-locator"> <!-- page differente citée -->
+								<text value="op.cit." font-style="italic" suffix=", " />
+							</if>
+							<else>
+								<text variable="number" suffix=", " />
+								<date variable="issued">
+									<date-part name="day" suffix=" " />
+									<date-part name="month" form="short" suffix=" " />
+									<date-part name="year" />
+								</date>
+							</else>
+						</choose>
+					</else-if>
+
 				</choose>
-			</else-if>
-			
-			<else-if type="legal_case">
-				<text variable="title" font-style="italic" suffix=", "/>
-				<text variable="number" prefix="n�" suffix=", "/>
-				<text variable="container-title" prefix="" suffix=", "/>
-				<date variable="issued" suffix=", ">
-				   <date-part name="day" suffix=" "/>
-				   <date-part name="month" form="short" suffix=" "/>
-				   <date-part name="year"/>
-				</date>
-			</else-if>
-			
-        </choose>
-      </group>
-    </layout>
-  </bibliography>
+			</group>
+		</layout>
+	</citation>
+
+	<bibliography entry-spacing="1" line-spacing="1">
+		<sort>
+			<key macro="type-sorting" />
+			<key macro="author" />
+		</sort>
+		<layout>
+			<group>
+				<text macro="author-short" suffix=", " />
+				<choose>
+					<if type="chapter paper-conference" match="any">
+						<text variable="title" quotes="true" suffix=", " />
+						<text value="in " font-style="italic" />
+						<text macro="editor" suffix=", " />
+						<text variable="container-title" font-style="italic" suffix=", " />
+						<text macro="publisher" suffix=", " />
+						<text variable="page" prefix="pp. " suffix="." />
+					</if>
+
+					<else-if type="webpage book legislation report">
+						<text variable="title" font-style="italic" suffix=", " />
+						<text macro="publisher" suffix=", " />
+						<text variable="number-of-pages" suffix=" pages." />
+					</else-if>
+
+					<else-if type="thesis">
+						<text variable="title" font-style="italic" suffix=", " />
+						<text macro="publisher" suffix=", " />
+						<text variable="number-of-pages" suffix=" pages." />
+					</else-if>
+
+					<else-if type="article-journal">
+						<text variable="title" quotes="true" suffix=", " />
+						<choose>
+							<if variable="container-title-short">
+								<text variable="container-title-short" font-style="italic"
+									suffix=", " />
+							</if>
+							<else>
+								<text variable="container-title" font-style="italic"
+									suffix=", " />
+							</else>
+						</choose>
+					</else-if>
+
+					<else-if type="legal_case">
+						<text variable="title" font-style="italic" suffix=", " />
+						<text variable="number" prefix="n�" suffix=", " />
+						<text variable="container-title" prefix="" suffix=", " />
+						<date variable="issued" suffix=", ">
+							<date-part name="day" suffix=" " />
+							<date-part name="month" form="short" suffix=" " />
+							<date-part name="year" />
+						</date>
+					</else-if>
+
+				</choose>
+			</group>
+		</layout>
+	</bibliography>
 </style>
