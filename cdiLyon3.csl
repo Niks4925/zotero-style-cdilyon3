@@ -180,7 +180,7 @@
 	</macro>
 
 	<macro name="citation-locator">
-		<group suffix=" ">
+		<group>
 			<choose>
 				<if variable="locator">
 					<choose>
