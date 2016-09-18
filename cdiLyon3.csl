@@ -208,7 +208,7 @@
 		</group>
 	</macro>
 
-<!-- Mise en forme des citations ---------------------------------------------->
+<!-- Mise en forme des citations -->
 	<citation near-note-distance="0">
 		<layout>
 			<group>
@@ -343,7 +343,7 @@
 	</citation>
 	
 	
-<!-- Mise en forme de la bibliographie ---------------------------------------------->
+<!-- Mise en forme de la bibliographie -->
 	<bibliography entry-spacing="1" line-spacing="1">
 		<sort>
 			<key macro="type-sorting" />
