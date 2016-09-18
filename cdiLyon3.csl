@@ -45,24 +45,6 @@
 		</choose>
 	</macro>
 
-	<macro name="citation-locator">
-		<group suffix=" ">
-			<choose>
-				<if variable="locator">
-					<choose>
-						<if locator="chapter">
-							<label variable="locator" form="long" text-case="capitalize-first" />
-						</if>
-						<else>
-							<label variable="locator" form="short" prefix=", " />
-						</else>
-					</choose>
-					<text variable="locator" suffix="." />
-				</if>
-			</choose>
-		</group>
-	</macro>
-
 	<macro name="author">
 		<choose>
 			<if variable="author">
@@ -207,6 +189,24 @@
 			<text variable="page" prefix="pp. " suffix="." />
 		</group>
 	</macro>
+	
+	<macro name="citation-locator">
+		<group suffix=" ">
+			<choose>
+				<if variable="locator">
+					<choose>
+						<if locator="chapter">
+							<label variable="locator" form="long" text-case="capitalize-first" />
+						</if>
+						<else>
+							<label variable="locator" form="short" prefix=", " />
+						</else>
+					</choose>
+					<text variable="locator" suffix="." />
+				</if>
+			</choose>
+		</group>
+	</macro>
 
 <!-- Mise en forme des citations -->
 	<citation near-note-distance="0">
@@ -258,7 +258,7 @@
 								</choose>
 								<choose>
 									<if variable="issue">
-										<text variable="issue" prefix=", " />
+										<text variable="issue" prefix=", n° " />
 									</if>
 								</choose>
 							</else>
