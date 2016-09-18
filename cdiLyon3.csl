@@ -179,17 +179,6 @@
 		</choose>
 	</macro>
 
-	<macro name="locators">
-		<group delimiter=", ">
-			<text variable="volume" prefix="Vol. " />
-			<text variable="issue" prefix="n° " />
-			<date variable="issued">
-				<date-part name="year" />
-			</date>
-			<text variable="page" prefix="pp. " suffix="." />
-		</group>
-	</macro>
-	
 	<macro name="citation-locator">
 		<group suffix=" ">
 			<choose>
@@ -202,7 +191,7 @@
 							<label variable="locator" form="short" prefix=", " />
 						</else>
 					</choose>
-					<text variable="locator" suffix="." />
+					<text variable="locator" />
 				</if>
 			</choose>
 		</group>
@@ -210,7 +199,7 @@
 
 <!-- Mise en forme des citations -->
 	<citation near-note-distance="0">
-		<layout>
+		<layout suffix="." delimiter="; ">
 			<group>
 				<choose>
 					<if type="chapter paper-conference" match="any">
@@ -235,7 +224,7 @@
 						<text variable="title" quotes="true" suffix=", " />
 						<choose>
 							<if position="ibid-with-locator"> <!-- page differente citée -->
-								<text value="op.cit." font-style="italic" suffix=", " />
+								<text value="op.cit." font-style="italic" />
 							</if>
 							<else>
 								<choose>
@@ -271,7 +260,7 @@
 						<text variable="title" font-style="italic" suffix=", " />
 						<choose>
 							<if position="ibid-with-locator"> <!-- page differente citée -->
-								<text value="op.cit." font-style="italic" suffix=", " />
+								<text value="op.cit." font-style="italic" />
 							</if>
 							<else>
 								<text macro="publisher" />
@@ -285,7 +274,7 @@
 						<text variable="title" font-style="italic" suffix=", " />
 						<choose>
 							<if position="ibid-with-locator"> <!-- page differente citée -->
-								<text value="op.cit." font-style="italic" suffix=", " />
+								<text value="op.cit." font-style="italic" />
 							</if>
 							<else>
 								<text macro="publisher" />
@@ -304,7 +293,7 @@
 						<text variable="title" font-style="italic" suffix=", " />
 						<choose>
 							<if position="ibid-with-locator"> <!-- page differente citée -->
-								<text value="op.cit." font-style="italic" suffix=", " />
+								<text value="op.cit." font-style="italic" />
 							</if>
 							<else>
 								<text variable="number" prefix="n° " suffix=", " />
@@ -324,7 +313,7 @@
 						<text macro="author" suffix=", " />
 						<choose>
 							<if position="ibid-with-locator"> <!-- page differente citée -->
-								<text value="op.cit." font-style="italic" suffix=", " />
+								<text value="op.cit." font-style="italic" />
 							</if>
 							<else>
 								<text variable="number" suffix=", " />
@@ -390,7 +379,7 @@
 
 					<else-if type="legal_case">
 						<text variable="title" font-style="italic" suffix=", " />
-						<text variable="number" prefix="n�" suffix=", " />
+						<text variable="number" prefix="n°" suffix=", " />
 						<text variable="container-title" prefix="" suffix=", " />
 						<date variable="issued" suffix=", ">
 							<date-part name="day" suffix=" " />
