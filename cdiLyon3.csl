@@ -198,18 +198,26 @@
 	</macro>
 
 <!-- Mise en forme des citations -->
-	<citation near-note-distance="0">
+	<citation near-note-distance="5000">
 		<layout suffix="." delimiter="; ">
 			<group>
 				<choose>
 					<if type="chapter paper-conference" match="any">
-						<text macro="author-citation" suffix=", " />
-						<text variable="title" quotes="true" suffix=", " />
 						<choose>
-							<if position="ibid-with-locator"> <!-- page differente citée -->
-								<text value="op.cit." font-style="italic" suffix=", " />
+							<if position="ibid-with-locator"> <!-- Identique a celle qui la precede immediatement et locator different -->
+								<text value="Ibid." font-style="italic" />
 							</if>
+							<else-if position="ibid"> <!-- Identique a celle qui la precede immediatement et locator identique -->
+								<text value="Ibidem" font-style="italic" />
+							</else-if>
+							<else-if position="near-note">	<!-- Cite plus loin -->
+								<text macro="author-citation" suffix=", " />
+								<text variable="title" quotes="true" suffix=", " />
+								<text value="Loc.cit." font-style="italic" />
+							</else-if>
 							<else>
+								<text macro="author-citation" suffix=", " />
+								<text variable="title" quotes="true" suffix=", " />
 								<text value="in " font-style="italic" />
 								<text variable="container-title" font-style="italic"
 									suffix=", " />
@@ -220,13 +228,21 @@
 					</if>
 
 					<else-if type="article-journal">
-						<text macro="author-citation" suffix=", " />
-						<text variable="title" quotes="true" suffix=", " />
 						<choose>
-							<if position="ibid-with-locator"> <!-- page differente citée -->
-								<text value="op.cit." font-style="italic" />
+							<if position="ibid-with-locator"> <!-- Identique a celle qui la precede immediatement et locator different -->
+								<text value="Ibid." font-style="italic" />
 							</if>
+							<else-if position="ibid"> <!-- Identique a celle qui la precede immediatement et locator identique -->
+								<text value="Ibidem" font-style="italic" />
+							</else-if>
+							<else-if position="near-note">	<!-- Cite plus loin -->
+								<text macro="author-citation" suffix=", " />
+								<text variable="title" quotes="true" suffix=", " />
+								<text value="Loc.cit." font-style="italic" />
+							</else-if>
 							<else>
+								<text macro="author-citation" suffix=", " />
+								<text variable="title" quotes="true" suffix=", " />
 								<choose>
 									<if variable="container-title-short">
 										<text variable="container-title-short" font-style="italic"
@@ -256,13 +272,21 @@
 					</else-if>
 
 					<else-if type="webpage thesis book" match="any">
-						<text macro="author-citation" suffix=", " />
-						<text variable="title" font-style="italic" suffix=", " />
 						<choose>
-							<if position="ibid-with-locator"> <!-- page differente citée -->
-								<text value="op.cit." font-style="italic" />
+							<if position="ibid-with-locator"> <!-- Identique a celle qui la precede immediatement et locator different -->
+								<text value="Ibid." font-style="italic" />
 							</if>
+							<else-if position="ibid"> <!-- Identique a celle qui la precede immediatement et locator identique -->
+								<text value="Ibidem" font-style="italic" />
+							</else-if>
+							<else-if position="near-note">	<!-- Cite plus loin -->
+								<text macro="author-citation" suffix=", " />
+								<text variable="title" font-style="italic" suffix=", " />
+								<text value="op.cit." font-style="italic" />
+							</else-if>
 							<else>
+								<text macro="author-citation" suffix=", " />
+								<text variable="title" font-style="italic" suffix=", " />
 								<text macro="publisher" />
 							</else>
 						</choose>
@@ -270,13 +294,21 @@
 					</else-if>
 
 					<else-if type="report">
-						<text macro="author-citation" suffix=", " />
-						<text variable="title" font-style="italic" suffix=", " />
 						<choose>
-							<if position="ibid-with-locator"> <!-- page differente citée -->
-								<text value="op.cit." font-style="italic" />
+							<if position="ibid-with-locator"> <!-- Identique a celle qui la precede immediatement et locator different -->
+								<text value="Ibid." font-style="italic" />
 							</if>
+							<else-if position="ibid"> <!-- Identique a celle qui la precede immediatement et locator identique -->
+								<text value="Ibidem" font-style="italic" />
+							</else-if>
+							<else-if position="near-note">	<!-- Cite plus loin -->
+								<text macro="author-citation" suffix=", " />
+								<text variable="title" font-style="italic" suffix=", " />
+								<text value="Préc."/>
+							</else-if>
 							<else>
+								<text macro="author-citation" suffix=", " />
+								<text variable="title" font-style="italic" suffix=", " />
 								<text macro="publisher" />
 								<choose>
 									<if variable="number">
@@ -289,13 +321,21 @@
 					</else-if>
 
 					<else-if type="legal_case">
-						<text macro="author-citation" suffix=", " />
-						<text variable="title" font-style="italic" suffix=", " />
 						<choose>
-							<if position="ibid-with-locator"> <!-- page differente citée -->
-								<text value="op.cit." font-style="italic" />
+							<if position="ibid-with-locator"> <!-- Identique a celle qui la precede immediatement et locator different -->
+								<text value="Ibid." font-style="italic" />
 							</if>
+							<else-if position="ibid"> <!-- Identique a celle qui la precede immediatement et locator identique -->
+								<text value="Ibidem" font-style="italic" />
+							</else-if>
+							<else-if position="near-note">	<!-- Cite plus loin -->
+								<text macro="author-citation" suffix=", " />
+								<text variable="title" font-style="italic" suffix=", " />
+								<text value="Préc."/>
+							</else-if>
 							<else>
+								<text macro="author-citation" suffix=", " />
+								<text variable="title" font-style="italic" suffix=", " />
 								<text variable="number" prefix="n° " suffix=", " />
 								<text variable="container-title" prefix="" suffix=", " />
 								<date variable="issued">
@@ -309,13 +349,21 @@
 					</else-if>
 
 					<else-if type="legislation">
-						<text variable="title" font-style="italic" suffix=", " />
-						<text macro="author" suffix=", " />
 						<choose>
-							<if position="ibid-with-locator"> <!-- page differente citée -->
-								<text value="op.cit." font-style="italic" />
+							<if position="ibid-with-locator"> <!-- Identique a celle qui la precede immediatement et locator different -->
+								<text value="Ibid." font-style="italic" />
 							</if>
+							<else-if position="ibid"> <!-- Identique a celle qui la precede immediatement et locator identique -->
+								<text value="Ibidem" font-style="italic" />
+							</else-if>
+							<else-if position="near-note">	<!-- Cite plus loin -->
+								<text variable="title-short" font-style="italic" suffix=", " />
+								<text macro="author" suffix=", " />
+								<text value="Préc."/>
+							</else-if>
 							<else>
+								<text variable="title" font-style="italic" suffix=", " />
+								<text macro="author" suffix=", " />
 								<text variable="number" suffix=", " />
 								<date variable="issued">
 									<date-part name="day" suffix=" " />
@@ -324,6 +372,7 @@
 								</date>
 							</else>
 						</choose>
+						<text macro="citation-locator" />
 					</else-if>
 
 				</choose>
