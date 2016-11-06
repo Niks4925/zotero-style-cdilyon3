@@ -375,12 +375,16 @@
 								</choose>
 								<text variable="title" font-style="italic" suffix=", " />
 								<text variable="number" prefix="n° " suffix=", " />
-								<date variable="issued" suffix=", ">
+								<date variable="issued">
 									<date-part name="day" suffix=" " />
 									<date-part name="month" form="short" suffix=" " />
 									<date-part name="year" />
 								</date>
-								<text variable="container-title" />
+								<choose>
+									<if variable="container-title">
+										<text variable="container-title" prefix=", "/>
+									</if>
+								</choose>
 							</else>
 						</choose>
 						<text macro="citation-locator" />
