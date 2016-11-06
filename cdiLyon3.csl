@@ -5,7 +5,6 @@
 		<title>CDI Lyon 3</title>
 		<id>http://www.zotero.org/styles/cdi-lyon-3</id>
 		<link href="http://www.zotero.org/styles/cdi-lyon-3" rel="self" />
-		<link href="http://zotero.hypotheses.org/77" rel="documentation" />
 		<author>
 			<name>Lili</name>
 			<email />
@@ -15,9 +14,8 @@
 			<email />
 		</contributor>
 		<category citation-format="numeric" />
-		<summary>Style Zotero respectant les normes bibliographiques
-			fran?aises : NF Z44-005 et NF ISO 690-2</summary>
-		<updated>2014-10-12T14:50:33+00:00</updated>
+		<summary>Style Zotero respectant le style du centre de droit international Lyon 3</summary>
+		<updated>2016-11-06T19:54:00+00:00</updated>
 		<rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons
 			Attribution-ShareAlike 3.0 License</rights>
 	</info>
@@ -212,7 +210,14 @@
 							</else-if>
 							<else-if position="near-note">	<!-- Cite plus loin -->
 								<text macro="author-citation" suffix=", " />
-								<text variable="title" quotes="true" suffix=", " />
+								<choose>
+									<if variable="title-short">
+										<text variable="title-short" font-style="italic" suffix=", " />
+									</if>
+									<else>
+										<text variable="title" font-style="italic" suffix=", " />
+									</else>
+								</choose>
 								<text value="Loc.cit." font-style="italic" />
 							</else-if>
 							<else>
@@ -237,7 +242,14 @@
 							</else-if>
 							<else-if position="near-note">	<!-- Cite plus loin -->
 								<text macro="author-citation" suffix=", " />
-								<text variable="title" quotes="true" suffix=", " />
+								<choose>
+									<if variable="title-short">
+										<text variable="title-short" font-style="italic" suffix=", " />
+									</if>
+									<else>
+										<text variable="title" font-style="italic" suffix=", " />
+									</else>
+								</choose>
 								<text value="Loc.cit." font-style="italic" />
 							</else-if>
 							<else>
@@ -281,7 +293,14 @@
 							</else-if>
 							<else-if position="near-note">	<!-- Cite plus loin -->
 								<text macro="author-citation" suffix=", " />
-								<text variable="title" font-style="italic" suffix=", " />
+								<choose>
+									<if variable="title-short">
+										<text variable="title-short" font-style="italic" suffix=", " />
+									</if>
+									<else>
+										<text variable="title" font-style="italic" suffix=", " />
+									</else>
+								</choose>
 								<text value="op.cit." font-style="italic" />
 							</else-if>
 							<else>
@@ -303,7 +322,14 @@
 							</else-if>
 							<else-if position="near-note">	<!-- Cite plus loin -->
 								<text macro="author-citation" suffix=", " />
-								<text variable="title" font-style="italic" suffix=", " />
+								<choose>
+									<if variable="title-short">
+										<text variable="title-short" font-style="italic" suffix=", " />
+									</if>
+									<else>
+										<text variable="title" font-style="italic" suffix=", " />
+									</else>
+								</choose>
 								<text value="Préc."/>
 							</else-if>
 							<else>
@@ -330,19 +356,31 @@
 							</else-if>
 							<else-if position="near-note">	<!-- Cite plus loin -->
 								<text macro="author-citation" suffix=", " />
-								<text variable="title" font-style="italic" suffix=", " />
+								<choose>
+									<if variable="title-short">
+										<text variable="title-short" font-style="italic" suffix=", " />
+									</if>
+									<else>
+										<text variable="title" font-style="italic" suffix=", " />
+									</else>
+								</choose>
 								<text value="Préc."/>
 							</else-if>
 							<else>
 								<text macro="author-citation" suffix=", " />
+								<choose>								
+									<if variable="references">
+										<text variable="references" suffix=", " />
+									</if>
+								</choose>
 								<text variable="title" font-style="italic" suffix=", " />
 								<text variable="number" prefix="n° " suffix=", " />
-								<text variable="container-title" prefix="" suffix=", " />
-								<date variable="issued">
+								<date variable="issued" suffix=", ">
 									<date-part name="day" suffix=" " />
 									<date-part name="month" form="short" suffix=" " />
 									<date-part name="year" />
 								</date>
+								<text variable="container-title" />
 							</else>
 						</choose>
 						<text macro="citation-locator" />
@@ -357,7 +395,14 @@
 								<text value="Ibidem" font-style="italic" />
 							</else-if>
 							<else-if position="near-note">	<!-- Cite plus loin -->
-								<text variable="title-short" font-style="italic" suffix=", " />
+								<choose>
+									<if variable="title-short">
+										<text variable="title-short" font-style="italic" suffix=", " />
+									</if>
+									<else>
+										<text variable="title" font-style="italic" suffix=", " />
+									</else>
+								</choose>
 								<text macro="author" suffix=", " />
 								<text value="Préc."/>
 							</else-if>
