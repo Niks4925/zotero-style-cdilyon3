@@ -15,7 +15,7 @@
 		</contributor>
 		<category citation-format="numeric" />
 		<summary>Style Zotero respectant le style du centre de droit international Lyon 3</summary>
-		<updated>2016-11-06T19:54:00+00:00</updated>
+		<updated>2018-05-01T19:54:00+00:00</updated>
 		<rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons
 			Attribution-ShareAlike 3.0 License</rights>
 	</info>
@@ -33,7 +33,12 @@
 				<single>partie </single>
 				<multiple>parties </multiple>
 			</term>
-			<term name="sub verbo" form="short">
+			<term name="chapter">
+				<single>chapitre </single>
+				<multiple>chapitres </multiple>
+			</term>
+			<!-- Hack pour gérer la citation d'articles en utilisant sub verbo dans zotero -->
+			<term name="sub verbo" form="short"> 
 				<single>article </single>
 				<multiple>articles </multiple>
 			</term>
@@ -156,7 +161,7 @@
 				<text value="[s.n.], " />
 			</else>
 		</choose>
-		<text macro="edition" />
+		<text macro="edition" suffix=", "/>
 		<choose>
 			<if variable="issued">
 				<date variable="issued">
@@ -189,7 +194,7 @@
 				<if variable="locator">
 					<choose>
 						<if locator="chapter">
-							<label variable="locator" form="long" text-case="capitalize-first" />
+							<label variable="locator" form="long" text-case="capitalize-first" prefix=", "/>
 						</if>
 						<else-if locator="part">
 							<label variable="locator" form="short" text-case="capitalize-first" prefix=", "/>
@@ -204,12 +209,26 @@
 		</group>
 	</macro>
 
+	<macro name="title-quoted">
+		<choose>
+			<!-- Hack: Si la variable archive est utilisée, on utilise les guillemets "" -->
+			<if variable="archive">
+				<text variable="title" prefix="&#34;" suffix="&#34;, "/>
+			</if>
+			<else>
+				<text variable="title" quotes="true" suffix=", "/>
+			</else>
+		</choose>
+	</macro>
+
 <!-- Mise en forme des citations -->
 	<citation near-note-distance="5000">
-		<layout suffix="." delimiter="; ">
+		<layout suffix="." delimiter=" ; ">
 			<group>
 				<choose>
-					<if type="chapter" match="any">
+				
+					<!-- Chapitre de livre -->
+					<if type="chapter" match="any"> 
 						<choose>
 							<if position="ibid-with-locator"> <!-- Identique a celle qui la precede immediatement et locator different -->
 								<text value="Ibid." font-style="italic" />
@@ -233,7 +252,7 @@
 							</else-if>
 							<else>
 								<text macro="author-citation" suffix=", " />
-								<text variable="title" quotes="true" suffix=", " />
+								<text macro="title-quoted" />
 								<text value="in " font-style="italic" />
 								<choose>
 									<if variable="container-author">
@@ -245,6 +264,16 @@
 											</name>
 										</names>
 									</if>
+									<else-if variable="collection-editor">
+										<names variable="collection-editor">
+											<name sort-separator=" " initialize-with="." delimiter=", "
+												and="text" delimiter-precedes-last="never">
+												<name-part name="given" text-case="uppercase" />
+												<name-part name="family" text-case="uppercase" />
+											</name>
+										</names>
+										<text value=" (dir.)" suffix=", "/>
+									</else-if>
 								</choose>
 								<text variable="container-title" font-style="italic"
 									suffix=", " />
@@ -259,7 +288,8 @@
 						</choose>
 					</if>
 
-					<else-if type="paper-conference" match="any">
+					<!-- Article de colloque -->
+					<else-if type="paper-conference" match="any">	
 						<choose>
 							<if position="ibid-with-locator"> <!-- Identique a celle qui la precede immediatement et locator different -->
 								<text value="Ibid." font-style="italic" />
@@ -283,7 +313,7 @@
 							</else-if>
 							<else>
 								<text macro="author-citation" suffix=", " />
-								<text variable="title" quotes="true" suffix=", " />
+								<text macro="title-quoted" />
 								<text value="in " font-style="italic" />
 								<choose>
 									<if variable="container-author">
@@ -317,7 +347,8 @@
 						</choose>
 					</else-if>
 
-					<else-if type="article-journal entry-encyclopedia">
+					<!-- Article de revue, article d'encyclopédie -->
+					<else-if type="article-journal entry-encyclopedia"> 
 						<choose>
 							<if position="ibid-with-locator"> <!-- Identique a celle qui la precede immediatement et locator different -->
 								<text value="Ibid." font-style="italic" />
@@ -341,7 +372,7 @@
 							</else-if>
 							<else>
 								<text macro="author-citation" suffix=", " />
-								<text variable="title" quotes="true" suffix=", " />
+								<text macro="title-quoted" />
 								<choose>
 									<if variable="container-title-short">
 										<text variable="container-title-short" font-style="italic"
@@ -353,8 +384,15 @@
 									</else>
 								</choose>
 								<date variable="issued">
+									<date-part name="day" suffix=" " />
+									<date-part name="month" suffix=" " />
 									<date-part name="year" />
 								</date>
+								<choose>
+									<if variable="collection-title">
+										<text variable="collection-title" prefix=", " />
+									</if>
+								</choose>
 								<choose>
 									<if variable="volume">
 										<text variable="volume" prefix=", Vol. " />
@@ -370,6 +408,7 @@
 						</choose>
 					</else-if>
 
+					<!-- Page web, thèse, livre -->
 					<else-if type="webpage thesis book" match="any">
 						<choose>
 							<if position="ibid-with-locator"> <!-- Identique a celle qui la precede immediatement et locator different -->
@@ -407,6 +446,7 @@
 						</choose>
 					</else-if>
 
+					<!-- Rapport -->
 					<else-if type="report">
 						<choose>
 							<if position="ibid-with-locator"> <!-- Identique a celle qui la precede immediatement et locator different -->
@@ -431,6 +471,11 @@
 							</else-if>
 							<else>
 								<text macro="author-citation" suffix=", " />
+								<choose>
+									<if variable="genre">
+										<text variable="genre" suffix=", "/>
+									</if>
+								</choose>
 								<text variable="title" font-style="italic" suffix=", " />
 								<choose>
 									<if variable="collection-title">
@@ -448,6 +493,7 @@
 						</choose>
 					</else-if>
 
+					<!-- Affaire -->
 					<else-if type="legal_case">
 						<choose>
 							<if position="ibid-with-locator"> <!-- Identique a celle qui la precede immediatement et locator different -->
@@ -477,13 +523,17 @@
 										<text variable="references" suffix=", " />
 									</if>
 								</choose>
-								<text variable="title" font-style="italic" suffix=", " />
-								<text variable="number" prefix="n° " suffix=", " />
-								<date variable="issued">
+								<date variable="issued" suffix=", ">
 									<date-part name="day" suffix=" " />
-									<date-part name="month" form="short" suffix=" " />
+									<date-part name="month" suffix=" " />
 									<date-part name="year" />
 								</date>
+								<text variable="title" font-style="italic" />
+								<choose>
+									<if variable="number">
+										<text variable="number" prefix=", n° " />
+									</if>
+								</choose>
 								<choose>
 									<if variable="container-title">
 										<text variable="container-title" prefix=", "/>
@@ -494,6 +544,7 @@
 						</choose>
 					</else-if>
 
+					<!-- Acte juridique -->
 					<else-if type="legislation">
 						<choose>
 							<if position="ibid-with-locator"> <!-- Identique a celle qui la precede immediatement et locator different -->
@@ -522,7 +573,7 @@
 								<text variable="number" suffix=", " />
 								<date variable="issued">
 									<date-part name="day" suffix=" " />
-									<date-part name="month" form="short" suffix=" " />
+									<date-part name="month" suffix=" " />
 									<date-part name="year" />
 								</date>
 								<choose>
@@ -597,7 +648,7 @@
 						<text variable="container-title" prefix="" suffix=", " />
 						<date variable="issued" suffix=", ">
 							<date-part name="day" suffix=" " />
-							<date-part name="month" form="short" suffix=" " />
+							<date-part name="month" suffix=" " />
 							<date-part name="year" />
 						</date>
 					</else-if>
