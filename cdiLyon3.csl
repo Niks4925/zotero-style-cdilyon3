@@ -29,6 +29,14 @@
 				<single>§ </single>
 				<multiple>§§ </multiple>
 			</term>
+			<term name="part" form="short">
+				<single>partie </single>
+				<multiple>parties </multiple>
+			</term>
+			<term name="sub verbo" form="short">
+				<single>article </single>
+				<multiple>articles </multiple>
+			</term>
 		</terms>
 	</locale>
 
@@ -120,7 +128,7 @@
 			</else>
 		</choose>
 	</macro>
-
+	
 	<macro name="editor">
 		<names variable="editor">
 			<name sort-separator=" " initialize-with="." name-as-sort-order="all"
@@ -135,32 +143,30 @@
 	</macro>
 
 	<macro name="publisher">
-		<group delimiter=", ">
-			<choose>
-				<if variable="publisher-place">
-					<text variable="publisher-place" />
-				</if>
-			</choose>
-			<choose>
-				<if variable="publisher">
-					<text variable="publisher" />
-				</if>
-				<else>
-					<text value="[s.n.], " />
-				</else>
-			</choose>
-			<text macro="edition" />
-			<choose>
-				<if variable="issued">
-					<date variable="issued">
-						<date-part name="year" />
-					</date>
-				</if>
-				<else>
-					<text value="[s.d.]." />
-				</else>
-			</choose>
-		</group>
+		<choose>
+			<if variable="publisher-place">
+				<text variable="publisher-place" suffix=", "/>
+			</if>
+		</choose>
+		<choose>
+			<if variable="publisher">
+				<text variable="publisher" suffix=", "/>
+			</if>
+			<else>
+				<text value="[s.n.], " />
+			</else>
+		</choose>
+		<text macro="edition" />
+		<choose>
+			<if variable="issued">
+				<date variable="issued">
+					<date-part name="year" />
+				</date>
+			</if>
+			<else>
+				<text value="[s.d.]" />
+			</else>
+		</choose>
 	</macro>
 
 	<macro name="edition">
@@ -185,6 +191,9 @@
 						<if locator="chapter">
 							<label variable="locator" form="long" text-case="capitalize-first" />
 						</if>
+						<else-if locator="part">
+							<label variable="locator" form="short" text-case="capitalize-first" prefix=", "/>
+						</else-if>
 						<else>
 							<label variable="locator" form="short" prefix=", " />
 						</else>
@@ -200,10 +209,11 @@
 		<layout suffix="." delimiter="; ">
 			<group>
 				<choose>
-					<if type="chapter paper-conference" match="any">
+					<if type="chapter" match="any">
 						<choose>
 							<if position="ibid-with-locator"> <!-- Identique a celle qui la precede immediatement et locator different -->
 								<text value="Ibid." font-style="italic" />
+								<text macro="citation-locator" />
 							</if>
 							<else-if position="ibid"> <!-- Identique a celle qui la precede immediatement et locator identique -->
 								<text value="Ibidem" font-style="italic" />
@@ -219,23 +229,41 @@
 									</else>
 								</choose>
 								<text value="Loc.cit." font-style="italic" />
+								<text macro="citation-locator" />
 							</else-if>
 							<else>
 								<text macro="author-citation" suffix=", " />
 								<text variable="title" quotes="true" suffix=", " />
 								<text value="in " font-style="italic" />
+								<choose>
+									<if variable="container-author">
+										<names variable="container-author" suffix=", ">
+											<name sort-separator=" " initialize-with="." delimiter=", "
+												and="text" delimiter-precedes-last="never">
+												<name-part name="given" text-case="uppercase" />
+												<name-part name="family" text-case="uppercase" />
+											</name>
+										</names>
+									</if>
+								</choose>
 								<text variable="container-title" font-style="italic"
 									suffix=", " />
+								<choose>
+									<if variable="collection-title">
+										<text variable="collection-title" suffix=", " />
+									</if>
+								</choose>
 								<text macro="publisher" />
+								<text macro="citation-locator" />
 							</else>
 						</choose>
-						<text macro="citation-locator" />
 					</if>
 
-					<else-if type="article-journal">
+					<else-if type="paper-conference" match="any">
 						<choose>
 							<if position="ibid-with-locator"> <!-- Identique a celle qui la precede immediatement et locator different -->
 								<text value="Ibid." font-style="italic" />
+								<text macro="citation-locator" />
 							</if>
 							<else-if position="ibid"> <!-- Identique a celle qui la precede immediatement et locator identique -->
 								<text value="Ibidem" font-style="italic" />
@@ -251,6 +279,65 @@
 									</else>
 								</choose>
 								<text value="Loc.cit." font-style="italic" />
+								<text macro="citation-locator" />
+							</else-if>
+							<else>
+								<text macro="author-citation" suffix=", " />
+								<text variable="title" quotes="true" suffix=", " />
+								<text value="in " font-style="italic" />
+								<choose>
+									<if variable="container-author">
+										<names variable="container-author" suffix=", ">
+											<name sort-separator=" " initialize-with="." delimiter=", "
+												and="text" delimiter-precedes-last="never">
+												<name-part name="given" text-case="uppercase" />
+												<name-part name="family" text-case="uppercase" />
+											</name>
+										</names>
+									</if>
+								</choose>
+								<choose>
+									<if variable="container-title">
+										<text variable="container-title" font-style="italic" suffix=", " />
+									</if>
+								</choose>
+								<choose>
+									<if variable="event">
+										<text variable="event" suffix=", " />
+									</if>
+								</choose>
+								<choose>
+									<if variable="collection-title">
+										<text variable="collection-title" suffix=", " />
+									</if>
+								</choose>							
+								<text macro="publisher" />
+								<text macro="citation-locator" />
+							</else>
+						</choose>
+					</else-if>
+
+					<else-if type="article-journal entry-encyclopedia">
+						<choose>
+							<if position="ibid-with-locator"> <!-- Identique a celle qui la precede immediatement et locator different -->
+								<text value="Ibid." font-style="italic" />
+								<text macro="citation-locator" />
+							</if>
+							<else-if position="ibid"> <!-- Identique a celle qui la precede immediatement et locator identique -->
+								<text value="Ibidem" font-style="italic" />
+							</else-if>
+							<else-if position="near-note">	<!-- Cite plus loin -->
+								<text macro="author-citation" suffix=", " />
+								<choose>
+									<if variable="title-short">
+										<text variable="title-short" font-style="italic" suffix=", " />
+									</if>
+									<else>
+										<text variable="title" font-style="italic" suffix=", " />
+									</else>
+								</choose>
+								<text value="Loc.cit." font-style="italic" />
+								<text macro="citation-locator" />
 							</else-if>
 							<else>
 								<text macro="author-citation" suffix=", " />
@@ -278,15 +365,16 @@
 										<text variable="issue" prefix=", n° " />
 									</if>
 								</choose>
+								<text macro="citation-locator" />
 							</else>
 						</choose>
-						<text macro="citation-locator" />
 					</else-if>
 
 					<else-if type="webpage thesis book" match="any">
 						<choose>
 							<if position="ibid-with-locator"> <!-- Identique a celle qui la precede immediatement et locator different -->
 								<text value="Ibid." font-style="italic" />
+								<text macro="citation-locator" />
 							</if>
 							<else-if position="ibid"> <!-- Identique a celle qui la precede immediatement et locator identique -->
 								<text value="Ibidem" font-style="italic" />
@@ -302,20 +390,28 @@
 									</else>
 								</choose>
 								<text value="op.cit." font-style="italic" />
+								<text macro="citation-locator" />
 							</else-if>
 							<else>
 								<text macro="author-citation" suffix=", " />
 								<text variable="title" font-style="italic" suffix=", " />
+								<text variable="genre" suffix=", " /> <!-- Thesis type -->
+								<choose>
+									<if variable="collection-title">
+										<text variable="collection-title" suffix=", " />
+									</if>
+								</choose>	
 								<text macro="publisher" />
+								<text macro="citation-locator" />
 							</else>
 						</choose>
-						<text macro="citation-locator" />
 					</else-if>
 
 					<else-if type="report">
 						<choose>
 							<if position="ibid-with-locator"> <!-- Identique a celle qui la precede immediatement et locator different -->
 								<text value="Ibid." font-style="italic" />
+								<text macro="citation-locator" />
 							</if>
 							<else-if position="ibid"> <!-- Identique a celle qui la precede immediatement et locator identique -->
 								<text value="Ibidem" font-style="italic" />
@@ -331,25 +427,32 @@
 									</else>
 								</choose>
 								<text value="Préc."/>
+								<text macro="citation-locator" />
 							</else-if>
 							<else>
 								<text macro="author-citation" suffix=", " />
 								<text variable="title" font-style="italic" suffix=", " />
+								<choose>
+									<if variable="collection-title">
+										<text variable="collection-title" suffix=", " />
+									</if>
+								</choose>	
 								<text macro="publisher" />
 								<choose>
 									<if variable="number">
 										<text variable="number" prefix=", n° " />
 									</if>
 								</choose>
+								<text macro="citation-locator" />
 							</else>
 						</choose>
-						<text macro="citation-locator" />
 					</else-if>
 
 					<else-if type="legal_case">
 						<choose>
 							<if position="ibid-with-locator"> <!-- Identique a celle qui la precede immediatement et locator different -->
 								<text value="Ibid." font-style="italic" />
+								<text macro="citation-locator" />
 							</if>
 							<else-if position="ibid"> <!-- Identique a celle qui la precede immediatement et locator identique -->
 								<text value="Ibidem" font-style="italic" />
@@ -365,6 +468,7 @@
 									</else>
 								</choose>
 								<text value="Préc."/>
+								<text macro="citation-locator" />
 							</else-if>
 							<else>
 								<text macro="author-citation" suffix=", " />
@@ -385,20 +489,22 @@
 										<text variable="container-title" prefix=", "/>
 									</if>
 								</choose>
+								<text macro="citation-locator" />
 							</else>
 						</choose>
-						<text macro="citation-locator" />
 					</else-if>
 
 					<else-if type="legislation">
 						<choose>
 							<if position="ibid-with-locator"> <!-- Identique a celle qui la precede immediatement et locator different -->
 								<text value="Ibid." font-style="italic" />
+								<text macro="citation-locator" />
 							</if>
 							<else-if position="ibid"> <!-- Identique a celle qui la precede immediatement et locator identique -->
 								<text value="Ibidem" font-style="italic" />
 							</else-if>
 							<else-if position="near-note">	<!-- Cite plus loin -->
+								<text macro="author" suffix=", " />
 								<choose>
 									<if variable="title-short">
 										<text variable="title-short" font-style="italic" suffix=", " />
@@ -407,21 +513,31 @@
 										<text variable="title" font-style="italic" suffix=", " />
 									</else>
 								</choose>
-								<text macro="author" suffix=", " />
 								<text value="Préc."/>
+								<text macro="citation-locator" />
 							</else-if>
 							<else>
-								<text variable="title" font-style="italic" suffix=", " />
 								<text macro="author" suffix=", " />
+								<text variable="title" font-style="italic" suffix=", " />
 								<text variable="number" suffix=", " />
 								<date variable="issued">
 									<date-part name="day" suffix=" " />
 									<date-part name="month" form="short" suffix=" " />
 									<date-part name="year" />
 								</date>
+								<choose>
+									<if variable="chapter-number">	<!-- Session -->
+										<text variable="chapter-number" prefix=", " />
+									</if>
+								</choose>
+								<choose>
+									<if variable="references">	<!-- History -->
+										<text variable="references" prefix=", " />
+									</if>
+								</choose>
+								<text macro="citation-locator" />
 							</else>
 						</choose>
-						<text macro="citation-locator" />
 					</else-if>
 
 				</choose>
