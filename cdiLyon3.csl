@@ -15,7 +15,7 @@
 		</contributor>
 		<category citation-format="numeric" />
 		<summary>Style Zotero respectant le style du centre de droit international Lyon 3</summary>
-		<updated>2018-05-01T19:54:00+00:00</updated>
+		<updated>2018-10-14T15:17:00+00:00</updated>
 		<rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons
 			Attribution-ShareAlike 3.0 License</rights>
 	</info>
@@ -37,24 +37,20 @@
 				<single>chapitre </single>
 				<multiple>chapitres </multiple>
 			</term>
+			<term name="section" form="short">
+				<single>section </single>
+				<multiple>sections </multiple>
+			</term>
 			<!-- Hack pour gérer la citation d'articles en utilisant sub verbo dans zotero -->
 			<term name="sub verbo" form="short"> 
 				<single>article </single>
 				<multiple>articles </multiple>
 			</term>
+			<!-- Change le hyphen british par un trait d'union bien français -->
+    		<term name="page-range-delimiter">-</term>
 		</terms>
 	</locale>
 
-	<macro name="type-sorting">
-		<choose>
-			<if type="book">
-				<text value="LIVRES" />
-			</if>
-			<else>
-				<text value="AAUTRES" />
-			</else>
-		</choose>
-	</macro>
 
 	<macro name="author">
 		<choose>
@@ -133,19 +129,6 @@
 			</else>
 		</choose>
 	</macro>
-	
-	<macro name="editor">
-		<names variable="editor">
-			<name sort-separator=" " initialize-with="." name-as-sort-order="all"
-				delimiter=", " delimiter-precedes-last="always">
-				<name-part name="family" text-case="uppercase" />
-				<name-part name="given" text-case="uppercase" prefix="("
-					suffix=")" />
-			</name>
-			<label form="short" prefix=" (" suffix=".)" text-case="lowercase"
-				strip-periods="true" />
-		</names>
-	</macro>
 
 	<macro name="publisher">
 		<choose>
@@ -213,7 +196,7 @@
 		<choose>
 			<!-- Hack: Si la variable archive est utilisée, on utilise les guillemets "" -->
 			<if variable="archive">
-				<text variable="title" prefix="&#34;" suffix="&#34;, "/>
+				<text variable="title" prefix="&#8220;" suffix="&#8221;, "/>
 			</if>
 			<else>
 				<text variable="title" quotes="true" suffix=", "/>
@@ -247,7 +230,7 @@
 										<text variable="title" font-style="italic" suffix=", " />
 									</else>
 								</choose>
-								<text value="Loc.cit." font-style="italic" />
+								<text value="loc. cit." font-style="italic" />
 								<text macro="citation-locator" />
 							</else-if>
 							<else>
@@ -255,16 +238,8 @@
 								<text macro="title-quoted" />
 								<text value="in " font-style="italic" />
 								<choose>
-									<if variable="container-author">
-										<names variable="container-author" suffix=", ">
-											<name sort-separator=" " initialize-with="." delimiter=", "
-												and="text" delimiter-precedes-last="never">
-												<name-part name="given" text-case="uppercase" />
-												<name-part name="family" text-case="uppercase" />
-											</name>
-										</names>
-									</if>
-									<else-if variable="collection-editor">
+									<!-- Directeur de collection -->
+									<if variable="collection-editor">
 										<names variable="collection-editor">
 											<name sort-separator=" " initialize-with="." delimiter=", "
 												and="text" delimiter-precedes-last="never">
@@ -273,6 +248,26 @@
 											</name>
 										</names>
 										<text value=" (dir.)" suffix=", "/>
+									</if>
+									<!-- Editeur -->
+									<else-if variable="editor">
+										<names variable="editor" suffix=", ">
+											<name sort-separator=" " initialize-with="." delimiter=", "
+												and="text" delimiter-precedes-last="never">
+												<name-part name="given" text-case="uppercase" />
+												<name-part name="family" text-case="uppercase" />
+											</name>
+										</names>
+									</else-if>
+									<!-- Auteur du livre -->
+									<else-if variable="container-author">
+										<names variable="container-author" suffix=", ">
+											<name sort-separator=" " initialize-with="." delimiter=", "
+												and="text" delimiter-precedes-last="never">
+												<name-part name="given" text-case="uppercase" />
+												<name-part name="family" text-case="uppercase" />
+											</name>
+										</names>
 									</else-if>
 								</choose>
 								<text variable="container-title" font-style="italic"
@@ -308,7 +303,7 @@
 										<text variable="title" font-style="italic" suffix=", " />
 									</else>
 								</choose>
-								<text value="Loc.cit." font-style="italic" />
+								<text value="loc. cit." font-style="italic" />
 								<text macro="citation-locator" />
 							</else-if>
 							<else>
@@ -367,7 +362,7 @@
 										<text variable="title" font-style="italic" suffix=", " />
 									</else>
 								</choose>
-								<text value="Loc.cit." font-style="italic" />
+								<text value="loc. cit." font-style="italic" />
 								<text macro="citation-locator" />
 							</else-if>
 							<else>
@@ -428,7 +423,7 @@
 										<text variable="title" font-style="italic" suffix=", " />
 									</else>
 								</choose>
-								<text value="op.cit." font-style="italic" />
+								<text value="op. cit." font-style="italic" />
 								<text macro="citation-locator" />
 							</else-if>
 							<else>
@@ -438,6 +433,11 @@
 								<choose>
 									<if variable="collection-title">
 										<text variable="collection-title" suffix=", " />
+									</if>
+								</choose>
+								<choose>
+									<if variable="collection-number">
+										<text variable="collection-number" suffix=", " />
 									</if>
 								</choose>	
 								<text macro="publisher" />
@@ -600,7 +600,6 @@
 <!-- Mise en forme de la bibliographie -->
 	<bibliography entry-spacing="1" line-spacing="1">
 		<sort>
-			<key macro="type-sorting" />
 			<key macro="author" />
 		</sort>
 		<layout>
@@ -610,7 +609,6 @@
 					<if type="chapter paper-conference" match="any">
 						<text variable="title" quotes="true" suffix=", " />
 						<text value="in " font-style="italic" />
-						<text macro="editor" suffix=", " />
 						<text variable="container-title" font-style="italic" suffix=", " />
 						<text macro="publisher" suffix=", " />
 						<text variable="page" prefix="pp. " suffix="." />
