@@ -206,7 +206,7 @@
 
 <!-- Mise en forme des citations -->
 	<citation near-note-distance="5000">
-		<layout suffix="." delimiter=" ; ">
+		<layout delimiter=" ; ">
 			<group>
 				<choose>
 				
@@ -523,15 +523,33 @@
 										<text variable="references" suffix=", " />
 									</if>
 								</choose>
-								<date variable="issued" suffix=", ">
+                                <choose>
+                                    <!-- Tribunal -->								
+									<if variable="authority">
+										<text variable="authority" suffix=", " />
+									</if>
+								</choose>
+                                <choose>
+                                    <!-- First page -->								
+									<if variable="page">
+										<text variable="page" suffix=", " />
+									</if>
+								</choose>
+								<text variable="title" font-style="italic" suffix=", "/>
+                                <choose>
+                                    <!-- History -->								
+									<if variable="references">
+										<text variable="references" suffix=", " />
+									</if>
+								</choose>
+                                <date variable="issued" suffix=", ">
 									<date-part name="day" suffix=" " />
 									<date-part name="month" suffix=" " />
 									<date-part name="year" />
 								</date>
-								<text variable="title" font-style="italic" />
 								<choose>
 									<if variable="number">
-										<text variable="number" prefix=", n° " />
+										<text variable="number" prefix="n° " />
 									</if>
 								</choose>
 								<choose>
