@@ -542,7 +542,13 @@
                                         <text variable="page" suffix=", "/>
                                     </if>
                                 </choose>
-                                <text variable="title" font-style="italic" prefix="Affaire " suffix=", "/>
+                                <choose>
+                                    <!-- Texte libre (Affaire des...) -->
+                                    <if variable="license">
+                                        <text variable="license" suffix=" "/>
+                                    </if>
+                                </choose>
+                                <text variable="title" font-style="italic" suffix=", "/>
                                 <choose>
                                     <if variable="number">
                                         <text variable="number" prefix="requête n° "/>
@@ -557,8 +563,10 @@
                                     <date-part name="year"/>
                                 </date>
                                 <choose>
+                                    <!-- Recueil -->
                                     <if variable="container-title">
-                                        <text variable="container-title" prefix=", "/>
+                                        <text value="Rec. " font-style="italic" prefix=", "/>
+                                        <text variable="container-title"/>
                                     </if>
                                 </choose>
                                 <text macro="citation-locator"/>
