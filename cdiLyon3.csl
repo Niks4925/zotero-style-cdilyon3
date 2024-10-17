@@ -550,6 +550,12 @@
                                 </choose>
                                 <text variable="title" font-style="italic" suffix=", "/>
                                 <choose>
+                                    <!-- Texte libre (Arrêt...) -->
+                                    <if variable="references">
+                                        <text variable="references" suffix=", "/>
+                                    </if>
+                                </choose>
+                                <choose>
                                     <if variable="number">
                                         <text variable="number" prefix="requête n° " suffix=", "/>
                                     </if>
