@@ -551,10 +551,10 @@
                                 <text variable="title" font-style="italic" suffix=", "/>
                                 <choose>
                                     <if variable="number">
-                                        <text variable="number" prefix="requête n° "/>
+                                        <text variable="number" prefix="requête n° " suffix=", "/>
                                     </if>
                                     <else-if variable="note">
-                                        <text variable="note" prefix="n° "/>
+                                        <text variable="note" prefix="n° " suffix=", "/>
                                     </else-if>
                                 </choose>
                                 <date variable="issued" suffix=", ">
@@ -565,8 +565,8 @@
                                 <choose>
                                     <!-- Recueil -->
                                     <if variable="container-title">
-                                        <text value="Rec. " font-style="italic" prefix=", "/>
-                                        <text variable="container-title"/>
+                                        <text value="Rec. " font-style="italic"/>
+                                        <text variable="container-title" suffix=", "/>
                                     </if>
                                 </choose>
                                 <text macro="citation-locator"/>
