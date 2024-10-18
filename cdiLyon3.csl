@@ -526,11 +526,6 @@
                             <else>
                                 <text macro="author-citation" suffix=", "/>
                                 <choose>
-                                    <if variable="references">
-                                        <text variable="references" suffix=", "/>
-                                    </if>
-                                </choose>
-                                <choose>
                                     <!-- Tribunal -->
                                     <if variable="authority">
                                         <text variable="authority" suffix=", "/>
@@ -555,6 +550,11 @@
                                         <text variable="references" suffix=", "/>
                                     </if>
                                 </choose>
+                                <date variable="issued" suffix=", ">
+                                    <date-part name="day" suffix=" "/>
+                                    <date-part name="month" suffix=" "/>
+                                    <date-part name="year"/>
+                                </date>
                                 <choose>
                                     <if variable="number">
                                         <text variable="number" prefix="requête n° " suffix=", "/>
@@ -563,11 +563,6 @@
                                         <text variable="note" prefix="n° " suffix=", "/>
                                     </else-if>
                                 </choose>
-                                <date variable="issued" suffix=", ">
-                                    <date-part name="day" suffix=" "/>
-                                    <date-part name="month" suffix=" "/>
-                                    <date-part name="year"/>
-                                </date>
                                 <choose>
                                     <!-- Recueil -->
                                     <if variable="container-title">
