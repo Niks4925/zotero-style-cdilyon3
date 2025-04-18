@@ -641,15 +641,29 @@
                     <if type="chapter paper-conference" match="any">
                         <text variable="title" quotes="true" suffix=", "/>
                         <text value="in " font-style="italic"/>
+                        <names variable="editor" suffix=", ">
+                            <name sort-separator=" " initialize-with="." delimiter=", "
+                                  and="text" delimiter-precedes-last="never">
+                                <name-part name="given" text-case="uppercase"/>
+                                <name-part name="family" text-case="uppercase"/>
+                            </name>
+                        </names>
                         <text variable="container-title" font-style="italic" suffix=", "/>
                         <text macro="publisher" suffix=", "/>
                         <text variable="page" prefix="pp. " suffix="."/>
                     </if>
 
-                    <else-if type="webpage book legislation report">
+                    <else-if type="webpage book legislation">
                         <text variable="title" font-style="italic" suffix=", "/>
                         <text macro="publisher" suffix=", "/>
                         <text variable="number-of-pages" suffix=" pages."/>
+                    </else-if>
+
+                    <else-if type="report">
+                        <text variable="title" font-style="italic" suffix=", "/>
+                        <text macro="publisher" suffix=", "/>
+                        <text variable="collection-title" suffix=", "/>
+                        <text variable="page" suffix="."/>
                     </else-if>
 
                     <else-if type="thesis">
@@ -660,29 +674,71 @@
 
                     <else-if type="article-journal">
                         <text variable="title" quotes="true" suffix=", "/>
+                        <text variable="container-title" font-style="italic" suffix=", "/>
+                        <date variable="issued">
+                            <date-part name="day" suffix=" "/>
+                            <date-part name="month" suffix=" "/>
+                            <date-part name="year"/>
+                        </date>
                         <choose>
-                            <if variable="container-title-short">
-                                <text variable="container-title-short" font-style="italic"
-                                      suffix=", "/>
+                            <if variable="volume">
+                                <text variable="volume" prefix=", Vol. "/>
                             </if>
-                            <else>
-                                <text variable="container-title" font-style="italic"
-                                      suffix=", "/>
-                            </else>
+                        </choose>
+                        <choose>
+                            <if variable="issue">
+                                <text variable="issue" prefix=", n° "/>
+                            </if>
                         </choose>
                     </else-if>
 
                     <else-if type="legal_case">
+                        <choose>
+                            <!-- Tribunal -->
+                            <if variable="authority">
+                                <text variable="authority" suffix=", "/>
+                            </if>
+                        </choose>
+                        <choose>
+                            <!-- First page -->
+                            <if variable="page">
+                                <text variable="page" suffix=", "/>
+                            </if>
+                        </choose>
+                        <choose>
+                            <!-- Texte libre (Affaire des...) -->
+                            <if variable="license">
+                                <text variable="license" suffix=" "/>
+                            </if>
+                        </choose>
                         <text variable="title" font-style="italic" suffix=", "/>
-                        <text variable="number" prefix="n°" suffix=", "/>
-                        <text variable="container-title" prefix="" suffix=", "/>
+                        <choose>
+                            <!-- Texte libre (Arrêt...) -->
+                            <if variable="references">
+                                <text variable="references" suffix=", "/>
+                            </if>
+                        </choose>
                         <date variable="issued" suffix=", ">
                             <date-part name="day" suffix=" "/>
                             <date-part name="month" suffix=" "/>
                             <date-part name="year"/>
                         </date>
+                        <choose>
+                            <if variable="number">
+                                <text variable="number" prefix="requête n° " suffix=", "/>
+                            </if>
+                            <else-if variable="note">
+                                <text variable="note" prefix="n° " suffix=", "/>
+                            </else-if>
+                        </choose>
+                        <choose>
+                            <!-- Recueil -->
+                            <if variable="container-title">
+                                <text value="Rec. " font-style="italic"/>
+                                <text variable="container-title" suffix=", "/>
+                            </if>
+                        </choose>
                     </else-if>
-
                 </choose>
             </group>
         </layout>
