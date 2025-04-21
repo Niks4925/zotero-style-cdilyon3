@@ -373,14 +373,14 @@
                                 <text macro="author-citation" suffix=", "/>
                                 <text macro="title-quoted"/>
                                 <choose>
-                                    <if variable="container-title-short">
-                                        <text variable="container-title-short" font-style="italic"
-                                              suffix=", "/>
-                                    </if>
-                                    <else>
+                                    <if variable="container-title">
                                         <text variable="container-title" font-style="italic"
                                               suffix=", "/>
-                                    </else>
+                                    </if>
+                                    <else-if variable="container-title-short">
+                                        <text variable="container-title-short" font-style="italic"
+                                              suffix=", "/>
+                                    </else-if>
                                 </choose>
                                 <date variable="issued">
                                     <date-part name="day" suffix=" "/>
@@ -690,6 +690,7 @@
                                 <text variable="issue" prefix=", n° "/>
                             </if>
                         </choose>
+                        <text variable="number-of-pages" suffix=" pages."/>
                     </else-if>
 
                     <else-if type="legal_case">
@@ -725,18 +726,21 @@
                         </date>
                         <choose>
                             <if variable="number">
-                                <text variable="number" prefix="requête n° " suffix=", "/>
+                                <text variable="number" prefix="requête n° "/>
                             </if>
                             <else-if variable="note">
-                                <text variable="note" prefix="n° " suffix=", "/>
+                                <text variable="note" prefix="n° "/>
                             </else-if>
                         </choose>
                         <choose>
                             <!-- Recueil -->
                             <if variable="container-title">
                                 <text value="Rec. " font-style="italic"/>
-                                <text variable="container-title" suffix=", "/>
+                                <text variable="container-title" suffix="."/>
                             </if>
+                            <else>
+                                <text value="."/>
+                            </else>
                         </choose>
                     </else-if>
                 </choose>
